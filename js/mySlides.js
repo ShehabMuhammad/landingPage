@@ -1,6 +1,6 @@
-var images = ["10 - 3 الساعة3.jpg",
-"67411684_2359128204302534_6579736154822672384_n.jpg",
-"ok.jpg","A_blue_sky11.jfif"];
+var images = ["A_blue_sky11.jfif",
+"acapulco-1545208.jpg",
+"ocean-view-1311053-1280x960.jpg","sun-by-the-trees-1544340.jpg"];
 
 var imgHolder = document.getElementById("imageHolder");
 var index = 3, base = "images/", auto = true;
