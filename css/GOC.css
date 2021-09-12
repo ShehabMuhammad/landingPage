@@ -4,7 +4,7 @@
     align-content: space-around;
     justify-content: space-around;
     align-items: center;}
-.GOC img { width:50px !important; }
+.GOC img { width:4em !important; min-width:auto; }
 
 .GOC * {align-self:center;min-width:fit-content;}
 #enemy {display:inline-block;max-width:10%;flex-grow:1;padding:20px;background: linear-gradient(to right bottom, gray, lightgray);border-radius: 25px;
