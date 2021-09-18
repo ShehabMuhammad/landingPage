@@ -29,14 +29,14 @@ document.body.appendChild(sideMenu);
 
 setTimeout( "(function(yY){ if(pageYOffset == yY) { sideMenu.style.marginRight = \"-100%\";  }})(pageYOffset)", 4000);
 
-window.onload = function(){
+window.addEventListener('DOMContentLoaded', function(){
 
     let navo = document.getElementById("nav"),
         frag = document.createDocumentFragment();
 
     for(let i=0; i < arr.length; i++){
 
-        let div = document.createElement("DIV");
+        let div = document.createElement("li");
 
         div.className +=  " col";
 
@@ -67,7 +67,7 @@ frag.appendChild(div)
 } 
 
 navo.appendChild(frag);
-                          }
+                          });
 
 
 
@@ -136,12 +136,13 @@ function expander(){
     let disVal = target.style.display, hi = getComputedStyle(target)["height"] 
     if(disVal == "none"){
     target.style.display =  "block";
-    this.parentElement.style.marginBottom =  this.parentElement.style.marginBottom <= hi ? hi : this.parentElement.style.marginBottom ;
+    target.style.marginBottom = hi;
     this.textContent = "x";
     }
     else {
     target.style.display = "none"
-    this.parentElement.style.marginBottom -= hi;
+    this.parentElement.style.marginBottom = '';
+    target.style.marginBottom = '';
     this.textContent = "+";
     }
 
