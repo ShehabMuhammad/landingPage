@@ -1,6 +1,5 @@
 .slides-container {
-width:100vw;
-min-width: 20em;
+width:100%;min-height:30em;
 }
 
 #slide {
@@ -23,7 +22,8 @@ min-width: 20em;
     right:0;
     float:right;
 }
-#shit {
+#imageHolder {
+    vertical-align: middle;
     box-sizing: border-box;
-    max-width: 1000px !important;
+    width: 50%;
 }
