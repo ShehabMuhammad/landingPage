@@ -1,0 +1,253 @@
+
+<html>
+<head> 
+<base target="_blank">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="normalize.css">
+
+<link rel="stylesheet" href="css\mySlides.css">
+    <link rel="stylesheet" href="css/GOC.css">
+<link rel="stylesheet" href="css\style.css">
+<style>
+body, * {margin:0px;padding:0px;word-wrap:break-word;box-sizing:border-box;}
+header {background-color:black;}
+.col {display:inline-block; margin:5px; width:2vw;flex-grow:1;height:100% !important;}
+.link {width:5vw;}
+.col p {text-align:center;}
+.col h6 {margin-top:5px;}
+.col p {margin-bottom:5px;}
+header a {text-decoration:none; color:white;}
+header a:hover {color:lightblue;}
+.bottom {  padding:15px;display:flex; flex-direction:row;justify-content:space-between;align-items:stretch;  }
+footer * {width:100% !important;margin-top:10px;margin-bottom:10px; }
+footer a {text-decoration:none; color:white;}
+footer a:hover {color:lightblue;}
+footer, .footer {bottom:0;background-color:#000000;color:#969696; 
+margin-bottom:0px; width:100% !important;
+ margin-left:0px;margin-right:0px;}
+@media and (max-width:600px){
+.top {flex-direction:column;}
+
+header, .header {top:0;background-color:#000000;color:#969696;
+ margin-top:0px; width:100% !important;}
+
+.bottom {flex-direction:column;}
+header * {width:100% !important;margin-bottom:10px;margin-top:10px; }
+
+}
+</style>
+</head>
+<body >
+ <div class="body" >
+
+<header class="header" style="margin-bottom:20px;min-height:10%;">
+<ul id="nav" class="bottom" style="display:flex;text-align:center;align-items:center;align-content:center;">
+<div class="col link" style="height:100%;flex-grow:2;">
+ <h3> <a href="https://codewars.com/users/ShehabMuhammad"> Welcome. </h3>  </a></div>
+
+</ul>
+</header>
+
+<section style="min-height:65%;" class="main"> <div class="main"> 
+
+
+<section id="Home" class=""> <h1>Home</h1> 
+    
+
+ <div class="slides-container">
+     <div id="slide">
+         <button id="prev" onclick="previousSlide()">&#10094;</button>
+         <img id="imageHolder" src="images/A_blue_sky11.jfif">
+         <button id="next" onclick="nextSlide()">&#10095;</button>
+     </div>
+     <div id="indexes"> 
+     
+         <button id="stopBtn" onclick="stopShow()">⏯️</button>
+     </div>
+    </div>
+    
+    </section>
+
+<section id="About" > 
+<div style="padding-top:2em;text-align:center;margin-bottom:2em;"><h3> Some of GitHub repos.. </h3></div>
+
+<div class="container"> 
+<div class="item">
+    <h3><a href="https://github.com/ShehabMuhammad/images_scraper_cli"> Images Scraper CLI</a></h3
+    ><br> 
+<span>
+images_scraper_cli a simple image scraper python file that uses the cli, arguments are: --o=&lt;
+the output directory&gt;, --deep_scraping=&lt;whether you'd like to scrape images from the links found on 
+the main page as well or not&gt;, --url=&lt;the url you'd like to scrape&gt;. press CTRL+C if you wanted to stop it." [master 
+(root-commit) 8faa0ab] images_scraper…
+
+</span> </div>
+
+<div class="item"><h3><a href="https://github.com/ShehabMuhammad/Game-Of-Cards">Game Of Cards</a></h3><br>
+
+<span>A Game Of Cards With HTML CSS And JavaScript
+
+</span>  </div>
+    
+    <div class="item"><h3><a href="https://github.com/ShehabMuhammad/make-a-test"> test Me</a></h3> <br>
+
+<span>Spaced repetitions and practice are the two most effective methods of learning. And since the human brain tends to gradually forget the stored information if not used, I needed something to help me memorize any new knowledge. Such as: new foreign languages, Programming languages, Http-status-code, etc.
+
+You can make your own test to tests yourself on these topics by adding questions and the answers to them, And reviewing then every while. The results will be shown on the right side of the page. The questions currently are only choices.
+</span>  </div>
+<div class="item"><h3>
+    <a href="https://github.com/ShehabMuhammad/Dark-Light-Switcher-V0.0.0.1">Dark/Light Switcher</a></h3> <br> <span>Dark-Light-Switcher is a chrome browser extension that lets you change the theme of any website you're viewing to a dark, light theme, As well as letting you return to the original theme.
+</span>  </div>
+<div class="item"><h3><a href="https://github.com/ShehabMuhammad/Simple-PredictorGUI">simple predictorGUI</a></h3> <br><span>A simple gui program in python that let you choose a classifer file to predict with it any number of images.
+</span>  </div>
+<div class="item"><h3><a href="https://github.com/ShehabMuhammad/FaceAveragerGUI">FaceAveragerGUI</a></h3> <br><span>FaceAveragerGUI is a simple GUI that let you choose two images to average Feel free to suggest any modifications
+</span> 
+    </div>
+    
+</div>
+    
+    
+    
+    
+    </section>
+<script>
+
+function ty(self){
+let prv = self.previousElementSibling; 
+if(prv.getAttribute("used")=='nope'){self.innerHTML = '... read less.';prv.setAttribute("used","yes");
+prv.previousElementSibling.innerHTML += prv.innerHTML; 
+}
+else {
+ self.innerHTML = '... read more.';prv.setAttribute("used","nope");
+prv.previousElementSibling.innerHTML =prv.previousElementSibling.innerHTML.slice(0, prv.previousElementSibling.innerHTML.length - prv.innerHTML.length);   }
+}
+window.addEventListener('load', function(){
+let sliceLen = 21;
+document.querySelectorAll(".item span").forEach((e,i) => {    
+if(e.innerHTML.length > sliceLen){
+let firstText = ("" + e.innerHTML).slice(0, sliceLen), 
+    lastText = e.innerHTML.slice(sliceLen);
+    
+e.innerHTML = firstText;
+    
+if(e.parentElement && e.parentElement.innerHTML){e.parentElement.innerHTML += 
+    '<span used="nope" style="display:none;margin:0;padding:0;">' + lastText + ' </span>' +
+'<button  class="readMore" onclick="ty(this)">'+'... read more. </button>'; }
+}
+}); });
+</script>
+<script src="js/mySlides.js"></script>
+
+    <script src="js/GameOfCards.js"></script>
+<section id="Games">
+    <div class="banner"> GAMES </div>
+    <div class="GOC">
+<div class="upperCont">
+<div id="enemy">  
+<div><h6><bold style="width:relative;height:relative;"> <span id="opp"> 0 </span>  :عدد ورق خصمك </bold> </h6>  <br> </div>
+      <br>
+    <div><h6><span style="width:relative;height:relative;">    <span id="oppbsrat"> 0 </span> :عدد بصرات خصمك   </span> </h6> </div>
+       <br>
+ </div>
+<div id="hid" style="display:none;"></div>
+<div id="board" draggable="false"> 
+    
+    
+    </div>
+<div id="info">
+   <span id="num"> 0 </span>  <bold style="font-size: 17px;"> :عدد ورقك </bold> 
+
+    <br>  
+  
+<span id="bsrat"> 0 </span>  <span> : عدد بصراتك   </span> 
+<br>
+ 
+<button id="play" onclick="start();this.disabled=true;"> PLAY! </button>
+    
+    </div>
+    </div>
+<div id="handCards">
+    <div class="card" id="first"></div>
+    <div class="card" id="second"></div>
+    <div class="card" id="third"></div>
+    <div class="card" id="fourth"> </div>
+        </div>
+ </div>
+    <script src="js/GOC-2.js"></script>
+
+
+
+    </section>
+    
+    
+<section id="FAQ" class="">
+
+    </section>
+<section id="Contact-Us"> 
+    <center><h1>Contact Us</h1> </center>
+<div class="container">
+    <div class="inb">
+    <details>
+    <summary>
+    Who Are We?
+    </summary>
+<p>
+   We are a group specializing in web development and maintainance, We take care of building, maintaining, and developing your websites for you.
+    </p>
+    <p>
+    If you want to contact us, You can send us a message using the form you can see near this paragraph.
+    </p>
+    </details>
+    </div>
+
+
+<form>
+    <label for="email"> Email: </label>
+    <input id="email" type="text" placeholder="Email...">
+    <label for="Name"> Name: </label>
+    <input id="Name" placeholder="Name">
+    <label for="password"> Password: </label>
+    <input id="password" type="password" minlength="8" placeholder="password">
+    <label for"msg"> Message: </label>
+    <textarea id="msg" maxlength="200"> 
+    </textarea>
+    <input type="submit" >
+    </form>
+
+    </div>
+
+
+
+
+</section>
+
+</section>
+
+
+
+<footer class="footer" style="margin-top:20px;margin-bottom:0px;min-height:25%;">
+<div class="top" style="display:flex;text-align:center;align-items:center;align-content:center;">
+<div class="col link" style="height:100%;flex-grow:2;">
+ <h3> <a href="https://codewars.com/users/ShehabMuhammad"> Welcome. </h3>  </a></div>
+<div class="col"><h4> Services </h4>
+<hr><p> <a href="https://www.github.com/ShehabMuhammad">Projects</a>  </p></div>
+
+<div class="col"><h4> Services </h4>
+<hr><p> <a href="https://www.github.com/ShehabMuhammad">Projects</a>  </p></div>
+<div class="col"><h4> Services </h4>
+<hr><p> <a href="https://www.github.com/ShehabMuhammad">Projects</a>  </p></div>
+<div class="col"><h4> Services </h4>
+<hr><p> <a href="https://www.github.com/ShehabMuhammad">Projects</a>  </p></div>
+
+</div>
+<hr>
+<div style="text-align:center;margin-top:15px;"> Copy Rights &copy; Shehab Muhammad</div>
+</footer>
+
+</div>
+
+<script src="js/mod-app.js"></script>
+</body>
+
+</html>
