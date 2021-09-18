@@ -1,9 +1,9 @@
-var images = ["A_blue_sky11.jfif",
+const images = ["A_blue_sky11.jfif",
 "acapulco-1545208.jpg",
-"ocean-view-1311053-1280x960.jpg","sun-by-the-trees-1544340.jpg"];
+"ocean-view-1311053-1280x960.jpg","sun-by-the-trees-1544340.jpg"], base = "images/";
 
-var imgHolder = document.getElementById("imageHolder");
-var index = 3, base = "images/", auto = true;
+const imgHolder = document.getElementById("imageHolder");
+let index = 3, auto = true;
 function nextSlide(){
     index++;
     if( index >= images.length)index=0;
@@ -21,7 +21,7 @@ function nextSlide(){
 function previousSlide(){
     index--;
     
-    if(  index == undefined )index=images.length-1;
+    if(  index == undefined || index < 0 )index=images.length-1;
     imgHolder.setAttribute("src", base + images[index]);
         imgHolder.animate([
   { // from
@@ -33,8 +33,9 @@ function previousSlide(){
 ], {duration:1400, iterations:1} );
 }
 
-function autoSlideShow(num){
-    if(auto){ nextSlide(); setTimeout( "autoSlideShow(num)", 2500  ); }
+function autoSlideShow(){
+    if(auto){ nextSlide();  }
+setTimeout( "autoSlideShow()", 2500  );
 }
 function stopShow(){auto=auto?false:true;this.innerHTML = auto?">":"||";}
-autoSlideShow(0);
+autoSlideShow();
