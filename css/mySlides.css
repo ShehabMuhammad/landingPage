@@ -1,7 +1,7 @@
 .slides-container {
 width:100%;min-height:30em;
 }
-
+#Home h1 {margin-top:0;}
 #slide {
     position: relative;width:100%;align-items: center;
 }
