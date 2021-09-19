@@ -126,7 +126,7 @@ html {scroll-behavior: smooth;}
         flex-direction: column;flex-wrap: wrap;flex-basis: auto;}
 .main section:not(:last-child) {border-bottom:solid black 1px;}
    .main section.activeSection {
-  border-top:solid 10px green; border-bottom:solid 10px red; border-right:solid 10px yellow; border-left:solid 10px blue;
+  border-right:solid 10px yellow; border-left:solid 10px blue;
     }
 
 header {background-color:black;width: 100%;}
