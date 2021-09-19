@@ -1,4 +1,3 @@
-
 var sideMenu = document.createElement("div"), activeSection = null;
 sideMenu.id="sideMenu";
 
@@ -10,13 +9,13 @@ arr.slice().forEach((e,i) => {
 let v = document.createElement("div"); 
 v.style.backgroundColor = colors[i];
 v.innerHTML = "<a href=\"#"+e+"\" target=\"_self\"> "+e+"</a>";
-v.className += " navSide "; v.setAttribute("data-call", e);                        
+v.className += " navSide "; v.setAttribute("data-nav", e);                        
 frag0.appendChild(v); 
                          });
 
 sideMenu.addEventListener('click', function(ev){
-   let elem = ev.target; let cords = elem.getBoundingClientRect();
-    let dataCall = elem.getAttribute("data-call");
+    let elem = ev.target; let cords = elem.getBoundingClientRect();
+    let dataCall = elem.getAttribute("data-nav");
     if(!dataCall){return false;}
     if(cords["y"] >= 0 && cords["y"] < cords["height"]){return false;}
     window.scrollTo(0, document.getElementById(dataCall).offsetTop + 10 );
@@ -36,17 +35,17 @@ window.addEventListener('DOMContentLoaded', function(){
 
     for(let i=0; i < arr.length; i++){
 
-        let div = document.createElement("li");
+        let LI = document.createElement("li");
 
-        div.className +=  " col";
+        LI.className +=  " col";
 
         let a = document.createElement("A"); 
         
         a.setAttribute("target", "_self"); 
         
-        a.className += "SectA";
+        a.classList.add("SectA");
 
-        a.innerText = arr[i];
+        a.appendChild(document.createTextNode(arr[i]));
         
         a.onclick = function(ev){
   
@@ -59,8 +58,8 @@ window.addEventListener('DOMContentLoaded', function(){
   
 }
 a.setAttribute("href", "#" + arr[i]);
-div.appendChild(a);
-frag.appendChild(div)
+LI.appendChild(a);
+frag.appendChild(LI)
 
 
 
@@ -76,43 +75,78 @@ const but = document.createElement("button");but.style.position="fixed"; but.sty
 but.style.minHeight="3em";but.innerHTML = " TOP ";but.onclick = ()=>{window.scrollTo(0,0);}
 but.className += " topBtn";but.style.display = "none";document.body.appendChild(but);
 
-window.onscroll = function(ev){
-   but.style.display = pageYOffset > 50 ? "block":"none";
-   sideMenu.style.marginRight = "0";
-    var yY = pageYOffset;
-   setTimeout( function(){ if(pageYOffset == yY) { sideMenu.style.marginRight = "-100%";  } }
-, 4000);
+
+
+
+// This's the first implementation, It considers the active section is the one closest to the top..
+// لكن عندي طريقة تانية كنت شايفها أحسن بتعتبر السيكشن الي موجود في النص هو الأكتيف
+function getClosestToTop(){
+let min = Infinity, curr = null;
+sects.forEach((e, i) => {
+let obj = e.getBoundingClientRect();
+if( Math.abs(obj["y"]) < min ) {min = Math.abs(obj["y"]); curr = e.id; } 
+});
+if(activeSection){document.getElementById( "" + activeSection ).classList.remove("activeSection");}
+
+if(curr !== null){ 
+    sideNavHighLight(curr);
+    document.getElementById(curr).classList.add("activeSection");  activeSection = curr;}
+        
+       
+}
+
+
+function getActiveAtMiddle(ev){
     
    for(const elem of sects ){
        let upperBound = elem.offsetTop;
        if(!upperBound) {continue;}
     if(  pageYOffset + (window.innerHeight / 2  |0) > upperBound && (pageYOffset + (window.innerHeight/2 |0)) < (elem.offsetHeight + upperBound)  ){
-               //  console.log(elem.id + " is in view port.");
     if(activeSection)document.getElementById(activeSection).classList.remove("activeSection");
                  activeSection = elem.id;
                  document.getElementById(elem.id).className += " activeSection";
-                 for(let el of navEls){
-                     let att = el.getAttribute("data-call");
-                     if(att === elem.id){
-                         if(el.classList.contains("activeNav")){break;}
-                         el.className += " activeNav";
-                     }
-                     else {
-                                          el.classList.remove("activeNav")
-
-                 }
-                 }
+                 sideNavHighLight(elem.id);
                  break;
              }
     
     }
                      
 }
+function sideNavHighLight(elemId){
+        for(let el of navEls){
+                     let att = el.getAttribute("data-nav");
+                     if(att === elemId){
+                         if(el.classList.contains("activeNav")){break;}
+                         el.className += " activeNav";
+                     }
+                     else {
+                                          el.classList.remove("activeNav");}
+                 }
+}
+
+//
+window.onscroll = function(ev){
+  
+    but.style.display = pageYOffset > 50 ? "block":"none";
+   
+    sideMenu.style.marginRight = "0";
+    let yY = pageYOffset;
+   
+    setTimeout( function(){ if(pageYOffset == yY) { sideMenu.style.marginRight = "-100%";  } }
+               , 4000);
+
+    getClosestToTop(); 
+    // ely gay hwa tareqa mo5talefa le 7al el moshkela.
+    // law 3ayez tegeb ely fel nos uncomment ely gay w comment ely fawq.
+    // getActiveAtMiddle(ev);
+
+}
 
 var Qs = ["Who is behind the site?", "What kind of services does the site offer?","How Can I contact the admin?"],
          answers = ["Shehab Muhammad. Who is a passionate web developer, with an unstoppable thirst for knoweldge is the creator of this site.",
                    "The site offers quite a range of services that includes building, maintaining, and troubleshooting websites and applications.",
                    "You can contact the site developer at officialshehab96@gmail.com."];
+
 const faqElem = document.querySelector("#FAQ");
 let Qindex = 0;
 const frag2 = document.createDocumentFragment();
@@ -137,13 +171,17 @@ function expander(){
     if(disVal == "none"){
     target.style.display =  "block";
     target.style.marginBottom = hi;
+    //this.parentElement.style.marginBottom =  this.parentElement.style.marginBottom <= hi ? hi : this.parentElement.style.marginBottom ;
     this.textContent = "x";
     }
     else {
     target.style.display = "none"
     this.parentElement.style.marginBottom = '';
-    target.style.marginBottom = '';
     this.textContent = "+";
     }
 
 }
+
+
+
+(()=>{window.dispatchEvent(new Event('scroll') );})()
