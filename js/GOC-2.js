@@ -9,11 +9,8 @@ let elem = document.getElementById(tarId);
 let sum = obj.floor.length;
 
     if(!ev || !tarId){return false;}
-    console.log("Floor before: ",obj.floor, " Card is: ", tarId, " handCards: ", handCards );
 handCards.splice(handCards.indexOf(tarId), 1);var dt=new Date();
 drop(tarId);
-console.log("Floor after: ",obj.floor, " handCards after: ", handCards );
-console.log("Finished in " , (new Date() - dt) , " milieseconds.");
 let SUM = obj.floor.length;
 if(SUM < sum ) {  let elo =   document.getElementById( "num"  ); elo.innerHTML = +elo.innerHTML + (sum - obj.floor.length)  + 1  ;  }
 let r = Math.floor(Math.random() * (otherCards.length));
@@ -21,12 +18,11 @@ let d = otherCards[r];
 let m = createImage( d );
 m.draggable = false; m.ondragstart=()=>false;m.onselect=()=>false;
 m.style.display="none";document.getElementById("hid").appendChild(m);
-console.log("Floor before: ",obj.floor, " computer Card is: ", d, " otherCards: ", otherCards );
 otherCards.splice(r, 1);
-console.log(`Computer dropped : ${d}. `);userTurn=false;dt=new Date();
+// (`Computer dropped : ${d}. `);
+    userTurn=false;dt=new Date();
 drop(d);
-console.log("Floor after: ",obj.floor,  "otherCards: ", otherCards );
-console.log(`Finished in ${new Date() - dt} milieseconds.`);userTurn=true;
+   userTurn=true;
 if( obj.floor.length < SUM ) {  let elo =   document.getElementById( "opp"  ); elo.innerHTML = +elo.innerHTML + (SUM - obj.floor.length) + 1  ;  }
 if( handCards.length == 0 && otherCards.length == 0) {start();}
  }
@@ -36,7 +32,7 @@ function initialize(){
     if(board.children.length > 0){return false;}
     for (let i=0;i<4;i++){
     let r = Math.abs(Math.floor(Math.random() * (cards.length-1) ));
-    let e = cards[r] ; console.log(`This is r ${r}, and cards ${cards},`)
+    let e = cards[r] ;
 let c = createImage(e);
 c.draggable = false; c.ondragover = ()=>{return false;}
 
@@ -72,7 +68,6 @@ b.disabled=false;b.onclick=start;
 board.innerHTML = ""
         // lel ard
         obj.floor = []; floor = []; cards = c.slice(); otherCards=[]; handCards= [];
-console.log("Floor in erase : " , obj.floor);
         for(let node of hndCrds){ 
         node.innerHTML = "";
         }
@@ -108,7 +103,7 @@ return;
     let e = cards[r] ; 
 
     let hC = hndCrds[i];
-    if(hC.children.length > 0){throw " The Slot is Already Occupied! "+r; return false;}
+    if(hC.children.length > 0){/* throw " The Slot is Already Occupied! "+r; */ return false;}
     
     hC.appendChild(createImage(e) );
     handCards.push(e);
