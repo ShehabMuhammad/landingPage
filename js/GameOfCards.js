@@ -22,11 +22,10 @@ function GameOfCards(handCard, floorCards){
 var cands = [], candsX=[], index =0;
 for(let koko of floorCards){
        var card = parseInt(koko);
-      // console.log(`This is card ${card} handCard:${card}, koko ${koko}, ${handCard} and candsX: `, candsX);
        if(isNaN(card)){index++; continue;}
        if(card == 0 ){card = 10;}
        if(card > handCard){index++; continue;}
-       if(card == handCard){cands.push([card]);candsX.push([index]);index++;//console.log("We're here.")
+       if(card == handCard){cands.push([card]);candsX.push([index]);index++;
                           continue;}
     var OBJ = {1:[ [card] ] ,2:[],3:[],4:[],5:[],6:[] ,7:[]};
       var OBJx = {1:[ [index] ] ,2:[],3:[],4:[],5:[],6:[] ,7:[]};
@@ -63,7 +62,6 @@ for(let koko of floorCards){
 }
 
   var ret = {}, max = 0, ref=0;
-    console.log("End candsX: " , candsX)
   for (let i=0;i<candsX.length;i++){
 var arr = candsX[i];      
  ret[i] =    [candsX[i], ...candsX.filter((e,x) => { if(i == x){return false;}
@@ -74,7 +72,6 @@ let val = ret[i].reduce((a,b)=> {
 return a  + (b.length || 0) }, 0);    
 if(val > max){max = val ; ref = i ;}
 }
- // console.log("This is ret " , ret, "This is candsX", candsX, "This is ref", ref);
   return ret[ref] || [] ;
 }
 
@@ -123,8 +120,7 @@ function drop( data) {
     
     if(data == "" || !data){return false;}
     let ddg = document.getElementById(data);
-    if(!ddg){console.log("Element not found."); return false;}
-     console.log("This's freaking data: " , data);
+    if(!ddg){return false;}
     // You want the id and the element? right?
 if(ddg && ddg.parentNode.id==board.id){return false;}
     if(ddg){ddg.style.display="inline-block";}
@@ -132,7 +128,6 @@ if(ddg && ddg.parentNode.id==board.id){return false;}
     let c = data[0], sum= parseInt(data);
     sum = sum==0?10:sum;
 var goop=[];
-//$("#"+data).animate({position:"fixed",top:"30vh"}) ); return;
 // When there's no number
     
     if( data == "7rd" ){   
@@ -141,13 +136,13 @@ var goop=[];
     var l = obj.floor.length
     if(l == 1) {      Bsra();    obj.floor = [];
         sweep(board.children.length);
-        console.log("It's a komy!");
+        // ("It's a komy!");
         rm(elem);  }
     else if(l == 0 ) {     board.appendChild(elem); obj.floor.push("7rd");   }
         
        else{ obj.floor = [];
         sweep(board.children.length);
-        console.log("It's a komy!");
+        // ("It's a komy!");
         rm(elem);}
         return;
     }
@@ -194,7 +189,7 @@ else {
 
 elementOrig.draggable=()=>false;
 elementOrig.onselect=()=>false;
-elementOrig.ondragstart=()=>false; console.log("This's elementOrig : ", elementOrig);
+elementOrig.ondragstart=()=>false; 
 board.appendChild(elementOrig); obj.floor.push(elementOrig.id);  }
 
 return;
@@ -209,9 +204,7 @@ let len = board.children.length -1;
 
 
 
-//console.log("Here")
 var answer = (GameOfCards(sum, obj.floor))
-//console.log(answer)
 // bool don't forget it    
 var bool = answer.length == 0;
   
@@ -228,11 +221,9 @@ c.ondragstart=()=>false;
    }
 else {
  var foo = [], boo=[];
-//console.log(answer);
 for(let i of answer.flat()){let child = board.children[i] || (document.getElementById(obj.floor[i]));
                            // if(!child){continue;}
                             var booVal = (child && child.id) || obj.floor[i];
-                            console.log("booval And child: ",booVal, child, " and i ", i);
                             boo.push( booVal );
                             foo.push(child);}
     let pointer = 0;
