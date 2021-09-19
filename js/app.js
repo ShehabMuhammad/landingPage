@@ -10,22 +10,21 @@ arr.slice().forEach((e,i) => {
 
   let v = document.createElement("div"); 
 v.style.backgroundColor = colors[i];
-v.innerHTML = "<a href=\"#"+e+"\" target=\"_self\"> "+e+"</a>";
+v.innerHTML = "<a href=\"#"+e+"\" data-nav=\""+(e)+ "\" target=\"_self\"> "+e+"</a>";
 v.className += " navSide "; v.setAttribute("data-nav", e);                        
 frag0.appendChild(v); 
                          });
 
 sideMenu.addEventListener('click', function(ev){
+    ev.stopPropagation();
     let elem = ev.target, 
-        cords = elem.getBoundingClientRect(), 
-        dataCall = elem.getAttribute("data-nav");
-    
-  if(!dataCall){return false;}
-  if(cords["y"] >= 0 && cords["y"] < cords["height"]){return false;}
-    
-  window.scrollTo(0, document.getElementById(dataCall).offsetTop + 10 );
-    
-  return false; // Returning false so that it won't proceed with default action or behaviour.. Better than ev.preventDefault();
+               cords = elem.getBoundingClientRect(),
+               dataCall = elem.getAttribute("data-nav");
+    if(!dataCall){ ev.preventDefault(); return false;}
+    if(cords["y"] >= 0 && cords["y"] < cords["height"]){ ev.preventDefault(); return false; }
+    window.scrollTo(0, document.getElementById(dataCall).offsetTop + 10 );
+    ev.preventDefault(); // So that it won't proceed with default action or behaviour.. 
+    return false; 
 });
 
 sideMenu.appendChild(frag0);
