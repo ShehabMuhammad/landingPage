@@ -1,12 +1,14 @@
 var sideMenu = document.createElement("div"), activeSection = null;
 sideMenu.id="sideMenu";
 
+// an array containing the names/IDs of the sections.. 
 const arr = ["Home","About","Games","FAQ","Contact-Us"], colors = ["green","blue","red","gray","orange","black"];
 
 const frag0 = document.createDocumentFragment();
 
 arr.slice().forEach((e,i) => {
-let v = document.createElement("div"); 
+
+  let v = document.createElement("div"); 
 v.style.backgroundColor = colors[i];
 v.innerHTML = "<a href=\"#"+e+"\" target=\"_self\"> "+e+"</a>";
 v.className += " navSide "; v.setAttribute("data-nav", e);                        
@@ -14,20 +16,26 @@ frag0.appendChild(v);
                          });
 
 sideMenu.addEventListener('click', function(ev){
-    let elem = ev.target; let cords = elem.getBoundingClientRect();
-    let dataCall = elem.getAttribute("data-nav");
-    if(!dataCall){return false;}
-    if(cords["y"] >= 0 && cords["y"] < cords["height"]){return false;}
-    window.scrollTo(0, document.getElementById(dataCall).offsetTop + 10 );
-    return false;
+    let elem = ev.target, 
+        cords = elem.getBoundingClientRect(), 
+        dataCall = elem.getAttribute("data-nav");
+    
+  if(!dataCall){return false;}
+  if(cords["y"] >= 0 && cords["y"] < cords["height"]){return false;}
+    
+  window.scrollTo(0, document.getElementById(dataCall).offsetTop + 10 );
+    
+  return false; // Returning false so that it won't proceed with default action or behaviour.. Better than ev.preventDefault();
 });
 
 sideMenu.appendChild(frag0);
 
 document.body.appendChild(sideMenu);
 
+// The suggested setTimeout so we'll know if the user stopped scrolling or not.
 setTimeout( "(function(yY){ if(pageYOffset == yY) { sideMenu.style.marginRight = \"-100%\";  }})(pageYOffset)", 4000);
 
+// I used window.onload initially but changed it to 'DOMContentLoaded' as per the course suggestion, Because it occurs earlier
 window.addEventListener('DOMContentLoaded', function(){
 
     let navo = document.getElementById("nav"),
@@ -53,10 +61,15 @@ window.addEventListener('DOMContentLoaded', function(){
             if(activeSection){document.getElementById(activeSection).classList.remove("activeSection");}
     activeSection = arr[i];;
     let d = document.getElementById(arr[i]);
- d.className += "activeSection";d.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});return false;
+ d.className += "activeSection";
+          
+          // scrollIntoView method was one way to scroll the element intoView, We can also use offSettop and window.scrollTo it achieve the same goal.. 
+          d.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"}); 
+          return false;
 
   
 }
+      
 a.setAttribute("href", "#" + arr[i]);
 LI.appendChild(a);
 frag.appendChild(LI)
@@ -70,10 +83,15 @@ navo.appendChild(frag);
 
 
 
-const sects = arr.slice().map(e => document.getElementById(e)), navEls = document.querySelectorAll(".navSide");
+const sects = arr.slice().map(e => document.getElementById(e)), 
+      navEls = document.querySelectorAll(".navSide");
+
 const but = document.createElement("button");but.style.position="fixed"; but.style.right="1em";but.style.bottom="1em";but.style.minWidth="3em";
-but.style.minHeight="3em";but.innerHTML = " TOP ";but.onclick = ()=>{window.scrollTo(0,0);}
-but.className += " topBtn";but.style.display = "none";document.body.appendChild(but);
+but.style.minHeight="3em";but.innerHTML = " TOP ";
+but.onclick = ()=>{window.scrollTo(0,0);}
+but.className += " topBtn";
+but.style.display = "none";
+document.body.appendChild(but);
 
 
 
@@ -183,5 +201,5 @@ function expander(){
 }
 
 
-
+// We dispatch the scroll event once the page gets loaded to get the activeSection from the beginning. 
 (()=>{window.dispatchEvent(new Event('scroll') );})()
