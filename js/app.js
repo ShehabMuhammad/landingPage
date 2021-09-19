@@ -152,10 +152,10 @@ window.onscroll = function(ev){
     setTimeout( function(){ if(pageYOffset == yY) { sideMenu.style.marginRight = "-100%";  } }
                , 4000);
 
-    getClosestToTop(); 
-    // ely gay hwa tareqa mo5talefa le 7al el moshkela.
-    // law 3ayez tegeb ely fel nos uncomment ely gay w comment ely fawq.
-    // getActiveAtMiddle(ev);
+    // getClosestToTop(); 
+    // ely fawq hwa tareqa mo5talefa le 7al el moshkela.
+    // law 3ayez tegeb ely aqrab lel sat7 uncomment ely fawq w comment ely ta7t.
+     getActiveAtMiddle(ev);
 
 }
 
