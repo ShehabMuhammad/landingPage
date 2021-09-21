@@ -58,7 +58,6 @@
 
 
 const sideMenu = document.createElement("ul"), 
-      sideMenu.id="navbar__list",
       // an array containing the names/IDs of the sections.. 
       arr = ["Home","About","Games","FAQ","Contact-Us"],
       colors = ["green","blue","red","gray","orange","black"],
@@ -66,6 +65,7 @@ const sideMenu = document.createElement("ul"),
 
 // We use let because it could be changed in the future..
 let activeSection = null;
+sideMenu.setAttribute('id', 'navbar__list');
 
 arr.slice().forEach((element, i) => {
 
