@@ -216,6 +216,38 @@ function expander(){
 
 }
 
+function readMoreOrLess(self){
+let prev = self.previousElementSibling; 
+if(prev.getAttribute("used")=='nope'){ 
+   
+      self.innerHTML = '... read less.';prev.setAttribute("used","yes");
+
+      prev.previousElementSibling.innerHTML += prev.innerHTML; 
+}
+      
+else {
+ 
+      self.innerHTML = '... read more.';prev.setAttribute("used","nope");
+
+      prev.previousElementSibling.innerHTML =prev
+            .previousElementSibling.innerHTML.slice(0, 
+                                                    prev.previousElementSibling.innerHTML.length - prev.innerHTML.length);   }
+}
+
+window.addEventListener('load', function(){
+let sliceLen = 21;
+document.querySelectorAll(".item span").forEach((e,i) => {    
+if(e.innerHTML.length > sliceLen){
+let firstText = ("" + e.innerHTML).slice(0, sliceLen), 
+    lastText = e.innerHTML.slice(sliceLen);
+    
+e.innerHTML = firstText;
+    
+if(e.parentElement && e.parentElement.innerHTML){e.parentElement.innerHTML += 
+    '<span used="nope" style="display:none;margin:0;padding:0;">' + lastText + ' </span>' +
+'<button  class="readMore" onclick="readMoreOrLess(this)">'+'... read more. </button>'; }
+}
+}); });
 
 // We dispatch the scroll event once the page gets loaded to get the activeSection from the beginning. 
 (()=>{window.dispatchEvent(new Event('scroll') );})()
