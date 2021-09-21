@@ -1,30 +1,43 @@
-var sideMenu = document.createElement("div"), activeSection = null;
-sideMenu.id="sideMenu";
+const sideMenu = document.createElement("ul"), 
+      sideMenu.id="navbar__list",
+      // an array containing the names/IDs of the sections.. 
+      arr = ["Home","About","Games","FAQ","Contact-Us"],
+      colors = ["green","blue","red","gray","orange","black"],
+      frag0 = document.createDocumentFragment();
 
-// an array containing the names/IDs of the sections.. 
-const arr = ["Home","About","Games","FAQ","Contact-Us"], colors = ["green","blue","red","gray","orange","black"];
+// We use let because it could be changed in the future..
+let activeSection = null;
 
-const frag0 = document.createDocumentFragment();
+arr.slice().forEach((element, i) => {
 
-arr.slice().forEach((e,i) => {
+    let liElem = document.createElement("li"); 
+    liElem.style.backgroundColor = colors[i];
+    liElem.innerHTML = "<a href=\"#"+element+"\" data-nav=\""+(element)+ "\" target=\"_self\"> "+element+"</a>";
+    liElem.classlistItemst.add("navSide"); 
+    liElem.setAttribute("data-nav", element);                        
+    
+    //eventually the fragment append it..
+    frag0.appendChild(liElem); 
 
-  let v = document.createElement("div"); 
-v.style.backgroundColor = colors[i];
-v.innerHTML = "<a href=\"#"+e+"\" data-nav=\""+(e)+ "\" target=\"_self\"> "+e+"</a>";
-v.className += " navSide "; v.setAttribute("data-nav", e);                        
-frag0.appendChild(v); 
-                         });
+});
 
-sideMenu.addEventListener('click', function(ev){
+sideMenu.addEventListener('click', function(ev) {
+  
     ev.stopPropagation();
-    let elem = ev.target, 
+    
+  let elem = ev.target, 
                cords = elem.getBoundingClientRect(),
                dataCall = elem.getAttribute("data-nav");
-    if(!dataCall){ ev.preventDefault(); return false;}
-    if(cords["y"] >= 0 && cords["y"] < cords["height"]){ ev.preventDefault(); return false; }
-    window.scrollTo(0, document.getElementById(dataCall).offsetTop + 10 );
-    ev.preventDefault(); // So that it won't proceed with default action or behaviour.. 
-    return false; 
+  
+  if(!dataCall){ ev.preventDefault(); return false;}
+  
+  if(cords["y"] >= 0 && cords["y"] < cords["height"]){ ev.preventDefault(); return false; }
+  
+  window.scrollTo(0, document.getElementById(dataCall).offsetTop + 10 );
+  
+  ev.preventDefault(); // So that it won't proceed with default action or behaviour.. 
+  
+  return false; 
 });
 
 sideMenu.appendChild(frag0);
@@ -32,52 +45,56 @@ sideMenu.appendChild(frag0);
 document.body.appendChild(sideMenu);
 
 // The suggested setTimeout so we'll know if the user stopped scrolling or not.
-setTimeout( "(function(yY){ if(pageYOffset == yY) { sideMenu.style.marginRight = \"-100%\";  }})(pageYOffset)", 4000);
+setTimeout( "(function(yY){ if(pageYOffset == yY) { sideMenu.style.marginRight = \"-100%\";  }})(pageYOffset)",
+           4000);
 
 // I used window.onload initially but changed it to 'DOMContentLoaded' as per the course suggestion, Because it occurs earlier
 window.addEventListener('DOMContentLoaded', function(){
 
-    let navo = document.getElementById("nav"),
+    let navigationElement = document.getElementById("nav"),
         frag = document.createDocumentFragment();
 
     for(let i=0; i < arr.length; i++){
 
-        let LI = document.createElement("li");
+        let listItem = document.createElement("li");
 
-        LI.className +=  " col";
+        listItem.className +=  " col";
 
-        let a = document.createElement("A"); 
+        let hyperLink = document.createElement("A"); 
         
-        a.setAttribute("target", "_self"); 
+        hyperLink.setAttribute("target", "_self"); 
         
-        a.classList.add("SectA");
+        hyperLink.classList.add("SectA");
 
-        a.appendChild(document.createTextNode(arr[i]));
+        hyperLink.appendChild(document.createTextNode(arr[i]));
         
-        a.onclick = function(ev){
+        hyperLink.onclick = function(ev){
   
     
             if(activeSection){document.getElementById(activeSection).classList.remove("activeSection");}
-    activeSection = arr[i];;
-    let d = document.getElementById(arr[i]);
- d.className += "activeSection";
+    
+          activeSection = arr[i];;
+    
+          let theSection = document.getElementById(arr[i]);
+ 
+          theSection.className += "activeSection";
           
           // scrollIntoView method was one way to scroll the element intoView, We can also use offSettop and window.scrollTo it achieve the same goal.. 
-          d.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"}); 
+          theSection.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"}); 
           return false;
 
   
 }
       
 a.setAttribute("href", "#" + arr[i]);
-LI.appendChild(a);
-frag.appendChild(LI)
+listItem.appendChild(a);
+frag.appendChild(listItem)
 
 
 
 } 
 
-navo.appendChild(frag);
+navigationElement.appendChild(frag);
                           });
 
 
@@ -159,22 +176,22 @@ window.onscroll = function(ev){
 
 }
 
-var Qs = ["Who is behind the site?", "What kind of services does the site offer?","How Can I contact the admin?"],
+const questions = ["Who is behind the site?", "What kind of services does the site offer?","How Can I contact the admin?"],
          answers = ["Shehab Muhammad. Who is a passionate web developer, with an unstoppable thirst for knoweldge is the creator of this site.",
                    "The site offers quite a range of services that includes building, maintaining, and troubleshooting websites and applications.",
                    "You can contact the site developer at officialshehab96@gmail.com."];
 
 const faqElem = document.querySelector("#FAQ");
-let Qindex = 0;
+let questionIndex = 0;
 const frag2 = document.createDocumentFragment();
-for(const Question of Qs){
+for(const question of questions){
     let container = document.createElement("div"), newElem = document.createElement("div"), newBtn=document.createElement("button"),hiddenElem = document.createElement("div");
     newBtn.textContent="+";newBtn.classList.add("expander");hiddenElem.textContent = answers[Qindex++];
     hiddenElem.style.display = "none";
     newBtn.addEventListener('click', expander);
     container.classList.add("qCont");
     newElem.classList.add("question");
-    newElem.textContent = Question;
+    newElem.textContent = question;
    container.appendChild(newElem);container.appendChild(newBtn);container.appendChild(hiddenElem)
     frag2.appendChild(container)
     //container.style.marginBottom = getComputedStyle(hiddenElem)["height"];
