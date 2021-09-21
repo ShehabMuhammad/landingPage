@@ -85,35 +85,9 @@ You can make your own test to tests yourself on these topics by adding questions
     
     
     </section>
-<script>
 
-function ty(self){
-let prv = self.previousElementSibling; 
-if(prv.getAttribute("used")=='nope'){self.innerHTML = '... read less.';prv.setAttribute("used","yes");
-prv.previousElementSibling.innerHTML += prv.innerHTML; 
-}
-else {
- self.innerHTML = '... read more.';prv.setAttribute("used","nope");
-prv.previousElementSibling.innerHTML =prv.previousElementSibling.innerHTML.slice(0, prv.previousElementSibling.innerHTML.length - prv.innerHTML.length);   }
-}
-window.addEventListener('load', function(){
-let sliceLen = 21;
-document.querySelectorAll(".item span").forEach((e,i) => {    
-if(e.innerHTML.length > sliceLen){
-let firstText = ("" + e.innerHTML).slice(0, sliceLen), 
-    lastText = e.innerHTML.slice(sliceLen);
-    
-e.innerHTML = firstText;
-    
-if(e.parentElement && e.parentElement.innerHTML){e.parentElement.innerHTML += 
-    '<span used="nope" style="display:none;margin:0;padding:0;">' + lastText + ' </span>' +
-'<button  class="readMore" onclick="ty(this)">'+'... read more. </button>'; }
-}
-}); });
-</script>
 <script src="js/mySlides.js"></script>
 
-    <script src="js/GameOfCards.js"></script>
 <section id="Games">
     <div class="banner"> <h1> GAMES </h1> </div>
    
