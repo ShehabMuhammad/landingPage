@@ -1,19 +1,31 @@
 # landingPage
-# preview
+# description
 # landingPage is a project for the FWD web development udacity nanodegree 
 # It's a single web page that's supposed to be a landingPage, It's meant to fulfill the criteria imposed by the fwd course.  
 
 # Table of contents
 - [landingPage](#landingPage)
-- [preview](#preview)
+- [description](#description)
 - [Table of contents](#table-of-contents)
+- [technologies](#technologies)
+- [author](#author)
+- [credits](#credits)
 - [Usage](#usage)
 - [checklist](#checklist)
 - [note](#note)
 
+# technologies
+The project relies heavily on javascript, with some html and css
+
+# author
+The author of the project is Shehab Muhammad
+
+# credits
+Credits to all the tutors at udacity who helped me to learn many things that helped to a great extent.
+
 # Usage
 
-**You can access the page at:**
+**You can access and run the page at:**
 [landingPage](https://shehabmuhammad.github.io/landingPage/index.html)
 
 # checklist
