@@ -1,3 +1,62 @@
+/**
+ * 
+ * Manipulating the DOM exercise.
+ * Exercise programmatically builds navigation,
+ * scrolls to anchors from navigation,
+ * and highlights section in viewport upon scrolling.
+ * 
+ * Dependencies: None
+ * 
+ * JS Version: ES2015/ES6
+ * 
+ * JS Standard: ESlint
+ * 
+*/
+
+/**
+ * Define Global Variables
+ * 
+*/
+
+
+/**
+ * End Global Variables
+ * Start Helper Functions
+ * 
+*/
+
+
+
+/**
+ * End Helper Functions
+ * Begin Main Functions
+ * 
+*/
+
+// build the nav
+
+
+// Add class 'active' to section when near top of viewport
+
+
+// Scroll to anchor ID using scrollTO event
+
+
+/**
+ * End Main Functions
+ * Begin Events
+ * 
+*/
+
+// Build menu 
+
+// Scroll to section on link click
+
+// Set sections as active
+
+
+
+
 const sideMenu = document.createElement("ul"), 
       sideMenu.id="navbar__list",
       // an array containing the names/IDs of the sections.. 
@@ -251,3 +310,20 @@ if(e.parentElement && e.parentElement.innerHTML){e.parentElement.innerHTML +=
 
 // We dispatch the scroll event once the page gets loaded to get the activeSection from the beginning. 
 (()=>{window.dispatchEvent(new Event('scroll') );})()
+
+
+
+
+
+
+/*
+* STUDENT NOTES
+* I inserted several comments Which I believed were helpful.
+* I highlighted the activeSection as much as I could, As well as the navigation element that corresponds to it. (colorful borders and white background respectively).
+* I added some collapsible elements such as FAQ, and About section with readMore/readLess buttons.
+* I added a go to top button (Top), That only appears when you're at least 50 pixels away from the top.
+* I added a navigation side bar, as well as navigation bar in the header, That prevents default when clicked so it won't go to the href.
+* The Scrolling is smooth.
+* I added a slides show that I made specifically for the project And a game that I was working on before.
+*
+*/
