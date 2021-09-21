@@ -7,14 +7,13 @@
 - [x] navigation menu created using javascript
 - [x] used camelCase method of naming variable, and used const and let most often, meangingful names were chosen,
 - [x] added an extra section, highlighting for active section
+- [x] used markdown syntax for this readme.md file for example, 2 asterisk to make a bold phrase, and provided basic information
 
 __The names of Sections are:__
-1. Item 1
-1. Item 2
-1. Item 3
 1. Home
-2. About
-3. Games
-4. FAQ
-5. Contact-Us
+1. About
+1. Games
+1. FAQ
+1. Contact-Us
+
 # It's a single web page that's supposed to be a landingPage, It's meant to fulfill the criteria imposed by the fwd course.  
