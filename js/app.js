@@ -72,7 +72,7 @@ arr.slice().forEach((element, i) => {
     let liElem = document.createElement("li"); 
     liElem.style.backgroundColor = colors[i];
     liElem.innerHTML = "<a href=\"#"+element+"\" data-nav=\""+(element)+ "\" target=\"_self\"> "+element+"</a>";
-    liElem.classlistItemst.add("navSide"); 
+    liElem.classlist.add("navSide"); 
     liElem.setAttribute("data-nav", element);                        
     
     //eventually the fragment append it..
@@ -163,7 +163,14 @@ const sects = arr.slice().map(e => document.getElementById(e)),
 
 const but = document.createElement("button");but.style.position="fixed"; but.style.right="1em";but.style.bottom="1em";but.style.minWidth="3em";
 but.style.minHeight="3em";but.innerHTML = " TOP ";
-but.onclick = ()=>{window.scrollTo(0,0);}
+
+but.onclick = () => {
+      window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+});}
+
 but.className += " topBtn";
 but.style.display = "none";
 document.body.appendChild(but);
@@ -210,24 +217,25 @@ function sideNavHighLight(elemId){
                      let att = el.getAttribute("data-nav");
                      if(att === elemId){
                          if(el.classList.contains("activeNav")){break;}
-                         el.className += " activeNav";
+                         el.classList.add("activeNav");
                      }
                      else {
                                           el.classList.remove("activeNav");}
                  }
 }
 
+function changeDisplay(){
+  
+    but.style.display = pageYOffset > 50 ? "block":"none";
+    sideMenu.style.marginRight = "0";
+    let yY = pageYOffset;
+    setTimeout( function(){ if(pageYOffset == yY) { sideMenu.style.marginRight = "-100%";  } }
+               , 4000);
+}
 //
 window.onscroll = function(ev){
   
-    but.style.display = pageYOffset > 50 ? "block":"none";
-   
-    sideMenu.style.marginRight = "0";
-    let yY = pageYOffset;
-   
-    setTimeout( function(){ if(pageYOffset == yY) { sideMenu.style.marginRight = "-100%";  } }
-               , 4000);
-
+    changeDisplay();
     // getClosestToTop(); 
     // ely fawq hwa tareqa mo5talefa le 7al el moshkela.
     // law 3ayez tegeb ely aqrab lel sat7 uncomment ely fawq w comment ely ta7t.
@@ -244,16 +252,22 @@ const faqElem = document.querySelector("#FAQ");
 let questionIndex = 0;
 const frag2 = document.createDocumentFragment();
 for(const question of questions){
-    let container = document.createElement("div"), newElem = document.createElement("div"), newBtn=document.createElement("button"),hiddenElem = document.createElement("div");
-    newBtn.textContent="+";newBtn.classList.add("expander");hiddenElem.textContent = answers[Qindex++];
-    hiddenElem.style.display = "none";
-    newBtn.addEventListener('click', expander);
-    container.classList.add("qCont");
-    newElem.classList.add("question");
-    newElem.textContent = question;
-   container.appendChild(newElem);container.appendChild(newBtn);container.appendChild(hiddenElem)
-    frag2.appendChild(container)
-    //container.style.marginBottom = getComputedStyle(hiddenElem)["height"];
+    let container = document.createElement("div"), 
+        newElem = document.createElement("div"), 
+        newBtn=document.createElement("button"),
+        hiddenElem = document.createElement("div");
+    
+      newBtn.textContent="+";
+      newBtn.classList.add("expander");
+      hiddenElem.textContent = answers[Qindex++];
+      hiddenElem.style.display = "none";
+      newBtn.addEventListener('click', expander);
+      container.classList.add("qCont");
+      newElem.classList.add("question");
+      newElem.textContent = question;
+      container.appendChild(newElem);container.appendChild(newBtn);container.appendChild(hiddenElem)
+    
+      frag2.appendChild(container)
 }
 faqElem.appendChild(frag2);
     
