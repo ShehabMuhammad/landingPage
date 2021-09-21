@@ -314,16 +314,51 @@ if(e.parentElement && e.parentElement.innerHTML){e.parentElement.innerHTML +=
 
 
 
+// The images we want to show in the slide show, We can add more, It's helpful to put them in an array..
+const images = ["A_blue_sky11.jfif",
+"acapulco-1545208.jpg",
+"ocean-view-1311053-1280x960.jpg","sun-by-the-trees-1544340.jpg"], base = "images/";
 
+// We grab the element that contains the image..
+const imgHolder = document.getElementById("imageHolder");
 
-/*
-* STUDENT NOTES
-* I inserted several comments Which I believed were helpful.
-* I highlighted the activeSection as much as I could, As well as the navigation element that corresponds to it. (colorful borders and white background respectively).
-* I added some collapsible elements such as FAQ, and About section with readMore/readLess buttons.
-* I added a go to top button (Top), That only appears when you're at least 50 pixels away from the top.
-* I added a navigation side bar, as well as navigation bar in the header, That prevents default when clicked so it won't go to the href.
-* The Scrolling is smooth.
-* I added a slides show that I made specifically for the project And a game that I was working on before.
-*
-*/
+// The index of the image, And a boolean value indication whether to automate the slideshow or not..
+let index = 3, auto = true;
+function nextSlide(){
+    index++;
+    if( index >= images.length)index=0;
+    imgHolder.setAttribute("src", base + images[index]);
+    imgHolder.animate([
+  { 
+    opacity: 0
+  },
+  { 
+    opacity: 1
+  }
+], {duration:1400, iterations:1} );
+}
+
+function previousSlide(){
+    index--;
+    
+    if(  index == undefined || index < 0 )index=images.length-1;
+    imgHolder.setAttribute("src", base + images[index]);
+        imgHolder.animate([
+  { // from
+    opacity: 0
+  },
+  { // to
+    opacity: 1
+  }
+], {duration:1400, iterations:1} );
+}
+
+function autoSlideShow(){
+    if(auto){ nextSlide();  }
+setTimeout( "autoSlideShow()", 
+           2500  );
+}
+
+function stopShow(){auto = auto ? false : true; }
+
+autoSlideShow();
