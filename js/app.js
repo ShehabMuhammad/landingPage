@@ -27,13 +27,13 @@ sideMenu.addEventListener('click', function(ev) {
     
   let elem = ev.target, 
                cords = elem.getBoundingClientRect(),
-               dataCall = elem.getAttribute("data-nav");
+               dataNav = elem.getAttribute("data-nav");
   
-  if(!dataCall){ ev.preventDefault(); return false;}
+  if(!dataNav){ ev.preventDefault(); return false;}
   
   if(cords["y"] >= 0 && cords["y"] < cords["height"]){ ev.preventDefault(); return false; }
   
-  window.scrollTo(0, document.getElementById(dataCall).offsetTop + 10 );
+  document.getElementById(dataNav).scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"}) ;
   
   ev.preventDefault(); // So that it won't proceed with default action or behaviour.. 
   
