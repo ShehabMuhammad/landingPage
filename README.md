@@ -42,8 +42,10 @@ Credits to all the tutors at udacity who helped me to learn many things that hel
 - [x] The Scrolling is smooth.
 - [x] I added a slides show that I made specifically for the project And a game that I was working on before.
 
-#notes
-__The names of Sections are:__
+# notes
+
+__The names of Sections are: __
+
 1. Home
 1. About
 1. Games
