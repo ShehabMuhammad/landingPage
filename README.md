@@ -44,7 +44,7 @@ Credits to all the tutors at udacity who helped me to learn many things that hel
 
 # notes
 
-__The names of Sections are: __
+**The names of Sections are:**
 
 1. Home
 1. About
