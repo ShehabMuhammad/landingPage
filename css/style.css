@@ -4,7 +4,7 @@ box-sizing:border-box;
  *, *:after, *:before {box-sizing:inherit;margin:0;}
 header, footer {width: 100%}
 
-
+#Games p {padding:1em;}
 .main {min-height:max-content;min-height:-moz-max-content;}
 footer a {
     word-break: keep-all !important;display: inline-block !important;
@@ -124,7 +124,7 @@ summary {
   display: flex;
         flex-direction: column;flex-wrap: wrap;flex-basis: auto;}
 .main section:not(:last-child) {border-bottom:solid black 1px;}
-   .main section.activeSection {
+   .main section.active {
   border-right:solid 10px yellow; border-left:solid 10px blue;
     }
 
@@ -152,7 +152,14 @@ footer, .footer {bottom:0;background-color:#000000;color:#969696;
 margin:0;padding: 10px; width:100% !important;
 margin-top:0;margin-bottom:0px;min-height:25%;
 }
- .topBtn {transition: 0.3s;background-color: #f1f1f1;font-weight: 900;}
+ .topBtn {transition: 0.3s;background-color: #f1f1f1;font-weight: 900;
+position: fixed;
+right: 1em;
+bottom: 1em;
+min-width: 3em;
+min-height: 3em
+
+}
     .topBtn:hover {
         background-color: #1818de !important;
         color:white;
@@ -175,7 +182,7 @@ header * {width:100% !important;margin-bottom:10px;margin-top:10px; }
 
 
    
-#sideMenu {position:fixed;right:0; transition:0.8s; top:40%;}   
+#navbar__list {position:fixed;right:0; transition:0.8s; top:40%;list-style: none}   
 
 .navSide {
     padding:1px; min-height:2em; color:white;  border-radius:10em 0 0 10em; 
