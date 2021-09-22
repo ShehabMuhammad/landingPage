@@ -1,7 +1,7 @@
 # landingPage
 # description
-# landingPage is a project for the FWD web development udacity nanodegree 
-# It's a single web page that's supposed to be a landingPage, It's meant to fulfill the criteria imposed by the fwd course.  
+ **landingPage is a project for the FWD web development udacity nanodegree 
+ It's a single web page that's supposed to be a landingPage, It's meant to fulfill the criteria imposed by the fwd course.**
 
 # Table of contents
 - [landingPage](#landingPage)
